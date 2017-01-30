@@ -5,19 +5,18 @@ class Database{
 
     var $connection;
 
-    function __construct($host="localhost",$username="root",$password="haikarose",$database="superbell"){    
+    function __construct($host="localhost",$username="ville-user",$password="haikarose",$database="MediaroseDb"){    
         $this->connection=new mysqli($host,$username,$password,$database);            
     }
     
       
     
     //this function is for the book searching process
-    public function Post($keyword){
-        
-            $querry="SELECT Book.id,Book.title,Book.copy_count AS count,CONCAT(Author.firstName,
-            CONCAT(' ',Author.lastName)) AS author FROM  Author JOIN Book ON
-                     Book.author=Author.id AND Author.lastName LIKE '%$keyword%' 
-                     OR Author.firstName LIKE '%$keyword%' OR Book.title LIKE '%$keyword';";   
+    public function getPost($page,$total){  
+          
+            $querry="SELECT post.id,post.content,resource.url as resource ,
+            resource.type as type,post.date,uploader.name FROM post JOIN uploader 
+            ON post.poster_id=uploader.id JOIN resource ON resource.post_id=post.id ORDER BY post.date DESC LIMIT $page,$total;";   
                               
             $resultset=$this->connection->query($querry);            
             $posts;
@@ -26,9 +25,18 @@ class Database{
                     $posts[]=$row;            
             }
             
-            return $books;
+            return $posts;    
+    }
+    
+    
+    //this function is for login the media user//
+    
+    public function logUser($username,$password){
+            
+            $querry="SELECT * FROM U";
     
     }
+    
 }
 
 
