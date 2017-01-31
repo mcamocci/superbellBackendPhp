@@ -15,7 +15,7 @@
             $password=$_POST['password'];
         
             $database=new Database();
-            $database->logUser($email,$password);
+            echo $database->logUser($email,$password);
              
          }    
     

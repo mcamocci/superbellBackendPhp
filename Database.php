@@ -49,9 +49,11 @@ class Database{
             
             while($row=$resultSet->fetch_assoc()){                
                  if(password_verify($password,$row['password'])){
+                       
                         return $row['id'];
                   }else{
-                        return "0";
+                 
+                        return 0;
                   }                
             }            
             return 0;    
@@ -65,27 +67,14 @@ class Database{
            $resultSet=$this->connection->query($querrySave);
          
            if($resultSet){
+               
                 return 1;             
            }else{
                 return 0;           
            }
            
     }
-    
-    //this function is for the user registration in the database    
-    public function registerUser($name,$email,$password){   
-             
-           $hashed_password=password_hash($password,PASSWORD_DEFAULT);;  
-           $querrySave="INSERT INTO uploader(name,email,password) VALUES ('$name','$email','$hashed_password')";           
-           $resultSet=$this->connection->query($querrySave);
-         
-           if($resultSet){
-                return 1;             
-           }else{
-                return 0;           
-           }
-           
-    }
+ 
     
     
     //this for publishing the post from the medial   
@@ -114,12 +103,12 @@ class Database{
            
     }    
     
-    //adding files to a post
+  /*  //adding files to a post
     public void insertResource($id,$value){
         $sql="INSERT INTO resource values(post_id,url) VALUES('$id','$value')";
         $this->connection->query($sql);        
     }
-    
+    */
     
 }
 

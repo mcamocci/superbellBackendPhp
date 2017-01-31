@@ -1,22 +1,17 @@
 <?php
-
     require_once("Database.php");
-
     //do the listing 
     retrievePosts();
-
-
     function retrievePosts(){ 
        
-        if(isset($_POST['PAGE']) & isset($_POST['COUNT'])){
+        if(isset($_POST['page']) & isset($_POST['count'])){
         
-            $page=$_POST['PAGE'];
-            $count=$_POST['COUNT'];
+            $page=$_POST['page'];
+            $count=$_POST['count'];
             $database= new Database();
-            echo json_encode($database->getPost(0,5));
+            echo json_encode($database->getPost(page,count));
             
          }
          
     }
-
 ?>
