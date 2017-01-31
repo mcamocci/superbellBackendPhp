@@ -12,12 +12,4 @@ echo $database->logUser("mediarose@gmail.com",'haikarose');
 //echo $database->registerUser('Haikarose','mediarose@gmail.com','haikarose');
 
 
-
-
-
-
-
-
-
-
 ?>

@@ -51,9 +51,7 @@ class Database{
                  if(password_verify($password,$row['password'])){
                         return $row['id'];
                   }else{
-                        echo $password;
-                        echo $row['password'];
-                        return "no res";
+                        return "0";
                   }                
             }            
             return 0;    
@@ -78,7 +76,7 @@ class Database{
     public function registerUser($name,$email,$password){   
              
            $hashed_password=password_hash($password,PASSWORD_DEFAULT);;  
-           $querrySave="INSERT INTO uploader(name,email,password) values('$name','$email','$hashed_password')";           
+           $querrySave="INSERT INTO uploader(name,email,password) VALUES ('$name','$email','$hashed_password')";           
            $resultSet=$this->connection->query($querrySave);
          
            if($resultSet){
