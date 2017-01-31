@@ -9,7 +9,7 @@
             $page=$_POST['page'];
             $count=$_POST['count'];
             $database= new Database();
-            echo json_encode($database->getPost(page,count));
+            echo json_encode($database->getPost($page,$count));
             
          }
          

@@ -8,7 +8,7 @@
 
     function uploadTask(){
 
-        if(isset){
+        if(isset($_POST['USER_ID']) && isset($_POST['CONTENT']) && isset($_POST['RESOUCES'])){
             $user_id=$_POST['USER_ID'];
             $content=$_POST['CONTENT'];
             $resources=$_POST['RESOUCES'];

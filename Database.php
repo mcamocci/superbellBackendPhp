@@ -23,15 +23,17 @@ class Database{
             
             while($row=$resultset->fetch_assoc()){ 
                            
-                    $posts[]=$row;       
                     
-                    $querryTwo="SELECT type , url FROM resource where resource.post_id=$row[id]";
+                    $posts[$row['id']]=array('id'=>$row['id'],
+                    'date'=>$row['date'],'name'=>$row['name'],'content'=>$row['content']);        
+                    
+                    $querryTwo="SELECT type , url FROM resource where resource.post_id=$row[id];";
                     $secondResultSet=$this->connection->query($querryTwo);
                     
                     while($rowOne=$secondResultSet->fetch_assoc()){
                     
-                        $posts[$row['id']]["resources"][] =array("type"=>$rowOne['type'],"url"=>$rowOne['url']);
-                        
+                       $posts[$row['id']]["resources"][] =array("type"=>$rowOne['type'],"url"=>$rowOne['url']);
+                            
                     } 
                      
             }
