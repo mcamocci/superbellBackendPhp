@@ -74,12 +74,24 @@
              $connection=$database->connection;
              $sql="INSERT INTO post(poster_id,content) VALUES ('$user_id','$content')";
              
+             
              if($connection->query($sql)){
-                          
-                    foreach($resources as $resource){
-                        $sql="INSERT INTO resource(post_id,type,url) VALUES ('$post_id','$resource->$type','$resource->$url')";
-                        $connection->query($sql);
-                    }                    
+             
+                    $sqlId="SELECT post.id FROM post WHERE post.poster_id='$user_id'  ORDER BY post.id DESC LIMIT 1;";
+                    $resultset=$connection->query($sqlId);
+                    
+                    while($row=$resultset->fetch_assoc()){
+                    
+                        $post_id=$row['id'];
+                                                
+                        foreach($resources as $resource){        
+                                                                    
+                            $sqlInsertResource="INSERT INTO resource(post_id,type,url) VALUES ('$post_id','$resource->type','$resource->url')";
+                            $connection->query($sqlInsertResource);
+                            
+                        } 
+                    }
+                                    
                     return 1;
                                     
              }else{

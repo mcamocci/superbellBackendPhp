@@ -18,15 +18,18 @@
             $content=$_POST['CONTENT']; 
             $database=new Database();        
                  
-            if(isset($_POST['RESOUCES'])){  
-                  echo "resources set";
-                 $resources=$_POST['RESOUCES']; 
+            if(isset($_FILES['RESOUCES'])){  
+            
+                  
+            
+                 $resources=$_FILES['RESOUCES']; 
                  $resources=FileHandler::doTheUPload($user_id,$content,$resources); 
                  
-                 if($resources[0]!=null){
+                 if($resources!=null){
+                
                     $post->publishPostHasResources($user_id,$content,$resources);
                  }
-                  
+                 
             }else{       
                              
                  echo $post->publishPostNoResource($user_id,$content); 

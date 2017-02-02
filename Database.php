@@ -48,8 +48,6 @@ class Database{
            }
            
     }
- 
-    
     
     //adding files to a post
     public function insertResource($id,$value){

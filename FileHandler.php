@@ -1,54 +1,56 @@
 <?php 
 
     require_once("Database.php");
+    require_once("Settings.php");
 
     class FileHandler{
     
             public static function doTheUPload($user_id,$content,$resources){
             
                 $resourcesList=array();
-                $fileCount=count($_FILE['FILES']['name']);
-                $files=$_FILE['FILES'];
+                $fileCount=count($resources['name']);
                 
-                $database=new Database();
+                $files=$resources;
                 
-                $directorPath="/mediaUploads/";
-                $directorPath=$directorPath.basename($_FILES['file']['name']);
-                
-                if($file_count>0){              
+                $database=new Database();  
+                  
+                $directoryPath=Setting::$FILE_DIRECTORY;
+                                
+                if($fileCount>0){              
                       
-                        foreach($files as $file){
-                        
-                             $resource=new Resource();
-                             $directorPath=$directorPath.basename($file['name']); 
+                       $resource=null;
+                       
+                       for($i=0;$i<$fileCount;$i++){
+                       
+                           
+                             $directoryPath.=$resources['name'][$i];
+                         
                                                 
-                             if(move_uploaded_file($file['tmp_name'],$directoryPath)){
+                             if(move_uploaded_file($resources['tmp_name'][$i],$directoryPath)){                             
                              
-                                     //insert the url to the database.                                      
-                                   $ext = pathinfo($file, PATHINFO_EXTENSION);                           
-                                   $this->insertFileInfo($ext,$directoryPath);                                     
-                                   $resource->$type=$ext;
-                                   $resource->$url=$directorPath;    
-                                                            
+                                   //insert the url to the database.                                      
+                                   $ext = pathinfo($resources['name'][$i], PATHINFO_EXTENSION);                                   
+                                   $resource=new Resource(
+                                   pathinfo($resources['name'][$i], PATHINFO_EXTENSION),Setting::$DIRECTORY_NAME.$directoryPath);
+                                                                      
+                                                                                        
+                              }else{          
+                              
+                                                    
+                                    return null; 
+                                                                 
                               }
                               
-                             $resourcesList[]=$resource; 
-                                                       
-                        }                
-                        
-                }                  
+                             $resourcesList[]=$resource;                       
+                       }
+                       
+                }         
+                
                 
                 return $resourcesList;         
                 
             }
             
-            public static function insertFileInfo($type,$url){       
-                 
-                    $database=new Database();
-                    $database->publish($user_id,$content,$resources);
-                            $database->insertFileInfo($type,$url);  
-                                  
-            }
 
 
     }
