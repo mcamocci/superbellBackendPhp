@@ -9,7 +9,7 @@
     
     function prepare(){
     
-        if(isset($_POST['email']) && isset($_POST['email'])){
+        if(isset($_POST['email']) && isset($_POST['password'])){
         
             $email=$_POST['email'];
             $password=$_POST['password'];

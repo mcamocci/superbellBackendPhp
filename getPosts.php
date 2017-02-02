@@ -8,8 +8,10 @@
         
             $page=$_POST['page'];
             $count=$_POST['count'];
-            $database= new Database();
-            echo json_encode($database->getPost($page,$count));
+            $post= new Post();
+            $post->getAllPosts($page,$count);
+            header("Content-type: application/json");
+            echo json_encode($post->getAllPosts($page,$count));
             
          }
          
