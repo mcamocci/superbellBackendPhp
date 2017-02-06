@@ -6,7 +6,7 @@ require_once("Resource.php");
 class Database{
 
 
-    var $connection;
+    public $connection;
 
     function __construct($host="localhost",$username="root",$password="haikarose",$database="mediaroseDb"){ 
        
