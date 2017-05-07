@@ -63,6 +63,23 @@ echo 1;*/
     }
 
 
+    public function getAllUPloaders(){
+
+          $querry="SELECT uploader.id as id,uploader.name as poster_name,uploader.description,count(post.poster_id) as posts FROM uploader LEFT JOIN post ON uploader.id=post.poster_id GROUP BY uploader.id;";
+
+           $uploaders=array();
+           $resultset=$this->connection->query($querry);
+           while($row=$resultset->fetch_assoc()){
+               $uploaders[]=$row;
+           }
+           if(count($uploaders)<1){
+             return "none";
+           }
+           return json_encode($uploaders);
+
+    }
+
+
 }
 
 
